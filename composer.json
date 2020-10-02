@@ -1,0 +1,97 @@
+{
+  "name": "shaunfreeman/mezzio-api-demo",
+  "description": "Claims management system api",
+  "type": "project",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "laminas",
+    "mezzio",
+    "skeleton",
+    "middleware",
+    "psr",
+    "psr-7",
+    "psr-11",
+    "psr-15"
+  ],
+  "homepage": "https://mezzio.dev",
+  "support": {
+    "issues": "https://github.com/titan-refurbishments/tr-api/issues",
+    "source": "https://github.com/titan-refurbishments/tr-api/"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laminas": {
+      "component-whitelist": [
+        "mezzio/mezzio",
+        "mezzio/mezzio-helpers",
+        "mezzio/mezzio-router",
+        "laminas/laminas-httphandlerrunner",
+        "mezzio/mezzio-fastroute"
+      ]
+    }
+  },
+  "require": {
+    "php": "^7.4",
+    "ext-json": "*",
+    "ext-mysqli": "*",
+    "ext-pdo": "*",
+    "firebase/php-jwt": "^5.2",
+    "laminas/laminas-component-installer": "^2.1.1",
+    "laminas/laminas-config-aggregator": "^1.0",
+    "laminas/laminas-diactoros": "^1.7.1 || ^2.0",
+    "laminas/laminas-servicemanager": "^3.3",
+    "laminas/laminas-stdlib": "^3.1",
+    "mezzio/mezzio": "^3.0.1",
+    "mezzio/mezzio-fastroute": "^3.0",
+    "mezzio/mezzio-hal": "^1.3",
+    "mezzio/mezzio-helpers": "^5.0",
+    "mezzio/mezzio-problem-details": "^1.1",
+    "neomerx/cors-psr7": "^2.0"
+  },
+  "require-dev": {
+    "laminas/laminas-development-mode": "^3.1",
+    "mezzio/mezzio-tooling": "^1.0",
+    "phpspec/prophecy-phpunit": "^2.0",
+    "phpunit/phpunit": "^9.0",
+    "roave/security-advisories": "dev-master",
+    "squizlabs/php_codesniffer": "^2.9.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Cms\\App\\": "src/App/",
+      "Cms\\Managers\\": "src/Managers/",
+      "Cms\\Orders\\": "src/Orders/",
+      "Cms\\Users\\": "src/Users/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Cms\\Test\\App\\": "test/App/",
+      "Cms\\Test\\Users\\": "test/Users/"
+    }
+  },
+  "scripts": {
+    "post-create-project-cmd": [
+      "@development-enable"
+    ],
+    "development-disable": "laminas-development-mode disable",
+    "development-enable": "laminas-development-mode enable",
+    "development-status": "laminas-development-mode status",
+    "mezzio": "mezzio --ansi",
+    "check": [
+      "@cs-check",
+      "@test"
+    ],
+    "clear-config-cache": "php bin/clear-config-cache.php",
+    "cs-check": "phpcs",
+    "cs-fix": "phpcbf",
+    "serve": "php -S 0.0.0.0:8080 -t public/",
+    "test": "phpunit --colors=always",
+    "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+  },
+  "replace": {
+    "zendframework/zend-expressive-skeleton": "3.2.3"
+  }
+}

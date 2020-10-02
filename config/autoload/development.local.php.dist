@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * Development-only configuration.
+ *
+ * Put settings you want enabled when under development mode in this file, and
+ * check it into your repository.
+ *
+ * Developers on your team will then automatically enable them by calling on
+ * `composer development-enable`.
+ */
+
+declare(strict_types=1);
+
+return [
+    'db' => [
+        'user'      => 'dbuser',
+        'password'  => '!OneTwo3',
+        'host'      => 'mysql',
+        'schema'    => 'cms',
+        'port'      => 3306,
+        'charset'   => 'utf8mb4',
+    ],
+];

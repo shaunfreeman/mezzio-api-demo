@@ -1,0 +1,1 @@
+INSERT INTO cms.users (id, name, email, password, role, modified, created) VALUES (0x31663238356334362D373230612D346266392D383936392D333165613133333639356161, 'Admin', 'admin@example.com', '$2y$10$pEOATo5zwdTnCRAjgKYoH.Q3btu08i3d6Mo.eMrMSvG2WECI3rHyi', 'admin', '2020-04-23 15:46:33', '2020-04-23 15:46:33');
