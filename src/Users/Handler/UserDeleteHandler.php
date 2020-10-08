@@ -2,18 +2,20 @@
 
 declare(strict_types=1);
 
+
 namespace Cms\Users\Handler;
 
+
+use Cms\App\ValueObject\Uuid;
+use Cms\Users\Repository\UserRepositoryInterface;
 use Exception;
 use Laminas\Diactoros\Response\JsonResponse;
 use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Cms\Users\Entity\UserEntity;
-use Cms\Users\Repository\UserRepositoryInterface;
 
-final class UserCreateHandler implements RequestHandlerInterface
+class UserDeleteHandler implements RequestHandlerInterface
 {
     private UserRepositoryInterface $userRepository;
 
@@ -29,15 +31,15 @@ final class UserCreateHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $data = $request->getAttribute(UserEntity::class);
+        $uuid = $request->getAttribute(Uuid::class);
 
         try {
-            $user = UserEntity::fromArray((array) $data);
+            $result = $this->userRepository->delete($uuid);
 
-            if (!$this->userRepository->create($user->getArrayCopy())) {
+            if (false === $result) {
                 throw new Exception(sprintf(
-                    'Failed inserting user with name: %s',
-                    $user->getName()
+                    'Could not delete record with id: %s.',
+                    $uuid
                 ));
             }
         } catch (Exception $exception) {
@@ -46,10 +48,12 @@ final class UserCreateHandler implements RequestHandlerInterface
                     $request,
                     500,
                     $exception->getMessage(),
-                    'Failed adding user to database.'
+                    'Failed deleting record in database.'
                 );
         }
 
-        return new JsonResponse($user);
+        return new JsonResponse([
+            'message' => sprintf('record %s has been deleted', $uuid)
+        ]);
     }
 }

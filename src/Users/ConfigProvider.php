@@ -28,6 +28,8 @@ final class ConfigProvider
                     Handler\UserCollectionHandlerFactory::class,
                 Handler\UserCreateHandler::class =>
                     Handler\UserCreateHandlerFactory::class,
+                Handler\UserDeleteHandler::class =>
+                    Handler\UserDeleteHandlerFactory::class,
                 Repository\UserRepositoryInterface::class =>
                     Repository\Pdo\UserRepositoryFactory::class,
             ]

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Cms\Users;
 
+use Cms\App\Middleware\UuidMiddleware;
 use Mezzio\Application;
 use Mezzio\Helper\BodyParams\BodyParamsMiddleware;
 use Psr\Container\ContainerInterface;
@@ -27,6 +28,11 @@ final class RoutesDelegator
             UserInputFilterMiddleware::class,
             UserCreateHandler::class
         ], 'users.create');
+        $app->delete('/users/{uuid}', [
+            UuidMiddleware::class,
+            JwtMiddleware::class,
+            Handler\UserDeleteHandler::class
+        ], 'users.delete');
         return $app;
     }
 }
