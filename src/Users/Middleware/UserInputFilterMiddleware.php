@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Cms\Users\Middleware;
 
+use Cms\Users\Entity\UserDto;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -20,7 +21,13 @@ final class UserInputFilterMiddleware implements MiddlewareInterface
 
         $requestBody    = $request->getParsedBody();
         $cleanData      = (new UserInputFilter())->filter($requestBody);
-        $request        = $request->withAttribute(UserEntity::class, $cleanData);
+        $dto            = new UserDto(
+            $cleanData['name'],
+            $cleanData['email'],
+            $cleanData['password'],
+            $cleanData['role']
+        );
+        $request        = $request->withAttribute(UserEntity::class, $dto);
 
         return $handler->handle($request);
     }

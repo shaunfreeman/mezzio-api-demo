@@ -16,7 +16,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-final class UserReadHandler implements RequestHandlerInterface
+final class UserUpdateHandler implements RequestHandlerInterface
 {
     private UserRepositoryInterface $userRepository;
 
@@ -32,21 +32,33 @@ final class UserReadHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $uuid = $request->getAttribute(Uuid::class);
+        $data = $request->getAttribute(UserEntity::class);
 
         try {
-            $result = $this->userRepository->find($uuid);
-            $user   = UserEntity::fromArray($result);
+            $user = $this->userRepository->find(
+                $request->getAttribute(Uuid::class)
+            );
+
+            $user = UserEntity::fromArray($user);
+            $user = $user->updateFromDto($data);
+
+            if (!$this->userRepository->update($user->getArrayCopy())) {
+                throw new Exception(sprintf(
+                    'Failed updating manager id: %s',
+                    $user->getId()
+                ));
+            }
         } catch (Exception $exception) {
             return $this->responseFactory
                 ->createResponse(
                     $request,
-                    401,
+                    500,
                     $exception->getMessage(),
-                    'Not found.'
+                    'Failed updating record to database.'
                 );
         }
 
         return new JsonResponse($user->getArrayCopy());
     }
+
 }

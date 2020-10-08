@@ -38,6 +38,13 @@ final class RoutesDelegator
             JwtMiddleware::class,
             Handler\UserDeleteHandler::class
         ], 'users.delete');
+        $app->patch('/users/{uuid}', [
+            UuidMiddleware::class,
+            JwtMiddleware::class,
+            BodyParamsMiddleware::class,
+            Middleware\UserInputFilterMiddleware::class,
+            Handler\UserUpdateHandler::class
+        ], 'users.update');
         return $app;
     }
 }

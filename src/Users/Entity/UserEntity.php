@@ -15,7 +15,7 @@ final class UserEntity implements EntityInterface, JsonSerializable
     private Uuid $id;
     private string $name;
     private string $email;
-    private string $password;
+    private ?string $password;
     private string $role;
     private DateTimeImmutable $modified;
     private DateTimeImmutable $created;
@@ -46,7 +46,7 @@ final class UserEntity implements EntityInterface, JsonSerializable
         $user->role     = $dto->role;
         $user->modified = new DateTimeImmutable('now');
 
-        if (is_string($dto->password)) {
+        if ($dto->password) {
             $user->password = $dto->password;
         }
 

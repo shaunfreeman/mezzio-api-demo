@@ -32,6 +32,8 @@ final class ConfigProvider
                     Handler\UserDeleteHandlerFactory::class,
                 Handler\UserReadHandler::class =>
                     Handler\UserReadHandlerFactory::class,
+                Handler\UserUpdateHandler::class =>
+                    Handler\UserUpdateHandlerFactory::class,
                 Repository\UserRepositoryInterface::class =>
                     Repository\Pdo\UserRepositoryFactory::class,
             ]

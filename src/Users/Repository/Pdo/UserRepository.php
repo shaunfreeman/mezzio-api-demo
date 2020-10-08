@@ -8,7 +8,6 @@ use Exception;
 use PDO;
 use PDOException;
 use Cms\App\ValueObject\Uuid;
-use Cms\Users\Entity\UserDto;
 use Cms\Users\Entity\UserEntity;
 use Cms\Users\Repository\UserRepositoryInterface;
 
@@ -69,7 +68,7 @@ final class UserRepository implements UserRepositoryInterface
         );
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_CLASS, UserDto::class);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function create(array $data): bool
@@ -91,6 +90,8 @@ final class UserRepository implements UserRepositoryInterface
 
     public function update(array $data): bool
     {
+        unset($data['created']);
+
         $statement = $this->pdo->prepare('
             UPDATE `users`
             SET `name` = :name, `email` = :email, `password` = :password, `role` = :role, `modified` = :modified
