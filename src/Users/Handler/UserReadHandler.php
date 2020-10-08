@@ -7,6 +7,7 @@ namespace Cms\Users\Handler;
 
 
 use Cms\App\ValueObject\Uuid;
+use Cms\Users\Entity\UserEntity;
 use Cms\Users\Repository\UserRepositoryInterface;
 use Exception;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -15,7 +16,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-final class UserDeleteHandler implements RequestHandlerInterface
+final class UserReadHandler implements RequestHandlerInterface
 {
     private UserRepositoryInterface $userRepository;
 
@@ -34,26 +35,18 @@ final class UserDeleteHandler implements RequestHandlerInterface
         $uuid = $request->getAttribute(Uuid::class);
 
         try {
-            $result = $this->userRepository->delete($uuid);
-
-            if (false === $result) {
-                throw new Exception(sprintf(
-                    'Could not delete record with id: %s.',
-                    $uuid
-                ));
-            }
+            $result     = $this->userRepository->find($uuid);
+            $manager    = UserEntity::fromArray($result);
         } catch (Exception $exception) {
             return $this->responseFactory
                 ->createResponse(
                     $request,
-                    500,
+                    401,
                     $exception->getMessage(),
-                    'Failed deleting record in database.'
+                    'Not found.'
                 );
         }
 
-        return new JsonResponse([
-            'message' => sprintf('record %s has been deleted', $uuid)
-        ]);
+        return new JsonResponse($manager->getArrayCopy());
     }
 }

@@ -10,11 +10,11 @@ use Cms\Users\Repository\UserRepositoryInterface;
 use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 use Psr\Container\ContainerInterface;
 
-final class UserDeleteHandlerFactory
+final class UserReadHandlerFactory
 {
-    public function __invoke(ContainerInterface $container): UserDeleteHandler
+    public function __invoke(ContainerInterface $container): UserReadHandler
     {
-        return new UserDeleteHandler(
+        return new UserReadHandler(
             $container->get(UserRepositoryInterface::class),
             $container->get(ProblemDetailsResponseFactory::class)
         );

@@ -22,6 +22,11 @@ final class RoutesDelegator
             JwtMiddleware::class,
             Handler\UserCollectionHandler::class
         ], 'users');
+        $app->get('/users/{uuid}', [
+            UuidMiddleware::class,
+            JwtMiddleware::class,
+            Handler\UserReadHandler::class
+        ], 'users.read');
         $app->post('/users', [
             JwtMiddleware::class,
             BodyParamsMiddleware::class,
