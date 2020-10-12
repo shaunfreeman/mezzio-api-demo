@@ -14,7 +14,7 @@ class HomePageHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         return new JsonResponse([
-            'welcome'   => 'Titan Refurbishments',
+            'welcome'   => 'Mezzio API Demo',
             'jwt'       => $request->getAttribute('token')
         ]);
     }

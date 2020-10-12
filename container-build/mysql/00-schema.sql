@@ -16,6 +16,7 @@ drop table if exists orders;
 create table if not exists orders
 (
     id varbinary(36) primary key,
+    claim_number varchar(50) not null,
     doc json null,
     modified datetime not null,
     created datetime not null
