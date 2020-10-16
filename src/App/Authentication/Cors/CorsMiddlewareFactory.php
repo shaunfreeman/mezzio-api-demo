@@ -7,7 +7,6 @@ namespace Cms\App\Authentication\Cors;
 use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 
 final class CorsMiddlewareFactory
 {

@@ -36,6 +36,8 @@ final class ConfigProvider
                     Handler\UserUpdateHandlerFactory::class,
                 Repository\UserRepositoryInterface::class =>
                     Repository\Pdo\UserRepositoryFactory::class,
+                Middleware\UserInputFilterMiddleware::class =>
+                    Middleware\UserInputFilterMiddlewareFactory::class,
             ]
         ];
     }

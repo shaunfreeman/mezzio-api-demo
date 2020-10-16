@@ -40,11 +40,11 @@ final class ManagerEntity implements EntityInterface
     public function getArrayCopy(): array
     {
         return [
-            'id'        => (string) $this->getId(),
-            'name'      => $this->getName(),
-            'email'     => $this->getEmail(),
-            'modified'  => $this->getModified()->format('Y-m-d H:i:s'),
-            'created'   => $this->getCreated()->format('Y-m-d H:i:s'),
+            'id'        => (string) $this->id,
+            'name'      => $this->name,
+            'email'     => $this->email,
+            'modified'  => $this->modified->format('Y-m-d H:i:s'),
+            'created'   => $this->created->format('Y-m-d H:i:s'),
         ];
     }
 

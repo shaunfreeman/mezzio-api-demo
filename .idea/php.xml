@@ -170,7 +170,7 @@
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
   <component name="PhpUnit">
     <phpunit_settings>
-      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/phpunit.xml.dist" custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" phpunit_phar_path="" use_configuration_file="true" />
+      <phpunit_by_interpreter interpreter_id="e1cac4f8-e5e5-4218-8da8-f69502c4493f" configuration_file_path="/home/cms/phpunit.xml.dist" custom_loader_path="/home/cms/vendor/autoload.php" use_configuration_file="true" />
     </phpunit_settings>
   </component>
 </project>

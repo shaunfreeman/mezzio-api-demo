@@ -11,7 +11,7 @@ interface UserRepositoryInterface
 {
     public function findByEmail(string $email): UserEntity;
 
-    public function find(Uuid $uuid): array;
+    public function find(Uuid $uuid): UserEntity;
 
     public function findAll(): array;
 

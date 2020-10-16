@@ -100,6 +100,8 @@ final class CorsMiddleware implements MiddlewareInterface
 
     /**
      * Edge cannot handle multiple Access-Control-Expose-Headers headers
+     * @param array $headers
+     * @return array
      */
     private function fixHeaders(array $headers): array
     {

@@ -9,11 +9,11 @@ use PHPUnit\Framework\TestCase;
 
 class UserEntityTest extends TestCase
 {
-    private $data = [
-        'name'      => 'Joe Blogs',
-        'email'     => 'joe_blogs@example.com',
-        'password'  => 'password',
-        'role'      => 'admin',
+    private array $data = [
+        'name' => 'Joe Blogs',
+        'email' => 'joe_blogs@example.com',
+        'password' => 'password',
+        'role' => 'admin',
     ];
 
     public function testCanCreateFromArray()

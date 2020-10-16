@@ -39,7 +39,6 @@ final class UserUpdateHandler implements RequestHandlerInterface
                 $request->getAttribute(Uuid::class)
             );
 
-            $user = UserEntity::fromArray($user);
             $user = $user->updateFromDto($data);
 
             if (!$this->userRepository->update($user->getArrayCopy())) {
@@ -58,7 +57,7 @@ final class UserUpdateHandler implements RequestHandlerInterface
                 );
         }
 
-        return new JsonResponse($user->getArrayCopy());
+        return new JsonResponse($user);
     }
 
 }

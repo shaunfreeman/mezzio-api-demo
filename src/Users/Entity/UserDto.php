@@ -5,22 +5,18 @@ declare(strict_types=1);
 namespace Cms\Users\Entity;
 
 
-final class UserDto
+use Cms\App\Entity\DtoInterface;
+
+final class UserDto implements DtoInterface
 {
     public string $name;
     public string $email;
-    public ?string $password;
+    public string $password;
     public string $role;
+    public array $errors;
 
-    public function __construct(
-        string $name,
-        string $email,
-        ?string $password,
-        string $role
-    ) {
-        $this->name     = $name;
-        $this->email    = $email;
-        $this->password = $password;
-        $this->role     = $role;
+    public function getErrors(): array
+    {
+        return $this->errors;
     }
 }

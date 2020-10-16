@@ -49,17 +49,20 @@ final class OrderRepository implements OrderRepositoryInterface
 
     public function save(OrderEntity $orderEntity): OrderEntity
     {
-        $doc        = json_encode($orderEntity);
+        $order      = $orderEntity->getArrayCopy();
         $statement  = $this->pdo->prepare('
-            INSERT INTO `orders` (`id`, `doc`, `modified`, `created`) 
-            VALUES (:id, :doc, :modified, :created) 
+            INSERT INTO `orders` (`id`, `claim_number`, `job_number`, `doc`, `modified`, `created`) 
+            VALUES (:id, :claim_numer, :job_number, :doc, :modified, :created) 
             ON DUPLICATE KEY UPDATE doc = :doc, modified = :modified
         ');
+
         $statement->execute([
-            'id'        => $doc['id'],
-            'doc'       => $doc,
-            'modified',
-            'created',
+            'id'            => $order['id'],
+            'claim_number'  => $order['claim_number'],
+            'job_number'    => $order['job_number'],
+            'doc'           => json_encode($order['doc']),
+            'modified'      => $order['modified'],
+            'created'       => $order['created'],
         ]);
 
         return $orderEntity;

@@ -8,9 +8,9 @@ use Cms\App\Filter\InputFilter;
 
 final class ManagerInputFilter extends InputFilter
 {
-    public function __construct()
+    public function init()
     {
-        $this->filterDefinition = [
+        $this->sanitizeDefinition = [
             'name' => [
                 ['filter' => FILTER_SANITIZE_STRING],
                 ['filter' => FILTER_CALLBACK, 'options' => 'trim'],

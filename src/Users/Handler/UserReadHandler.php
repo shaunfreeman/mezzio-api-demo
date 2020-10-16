@@ -7,7 +7,6 @@ namespace Cms\Users\Handler;
 
 
 use Cms\App\ValueObject\Uuid;
-use Cms\Users\Entity\UserEntity;
 use Cms\Users\Repository\UserRepositoryInterface;
 use Exception;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -35,8 +34,7 @@ final class UserReadHandler implements RequestHandlerInterface
         $uuid = $request->getAttribute(Uuid::class);
 
         try {
-            $result = $this->userRepository->find($uuid);
-            $user   = UserEntity::fromArray($result);
+            $user = $this->userRepository->find($uuid);
         } catch (Exception $exception) {
             return $this->responseFactory
                 ->createResponse(
@@ -47,6 +45,6 @@ final class UserReadHandler implements RequestHandlerInterface
                 );
         }
 
-        return new JsonResponse($user->getArrayCopy());
+        return new JsonResponse($user);
     }
 }

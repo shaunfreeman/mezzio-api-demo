@@ -27,7 +27,9 @@ trait ProblemDetailsTrait
             $response->getReasonPhrase(),
             $arguments['message'],
             '',
-            []
+            [
+                'error_messages' => $arguments['error_messages'] ?? null,
+            ]
         );
     }
 }

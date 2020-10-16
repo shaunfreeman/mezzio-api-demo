@@ -12,13 +12,25 @@ use Cms\App\ValueObject\Uuid;
 
 final class UserEntity implements EntityInterface, JsonSerializable
 {
+    const USER_ROLE_ADMIN   = 'admin';
+    const USER_ROLE_MANAGER = 'manager';
+    const USER_ROLE_STAFF   = 'staff';
+
+    const USER_ROLES = [
+        self::USER_ROLE_ADMIN   => 'Admin',
+        self::USER_ROLE_MANAGER => 'Manager',
+        self::USER_ROLE_STAFF   => 'Staff',
+    ];
+
     private Uuid $id;
     private string $name;
     private string $email;
-    private ?string $password;
+    private string $password;
     private string $role;
     private DateTimeImmutable $modified;
     private DateTimeImmutable $created;
+
+
 
     /**
      * @param array $data
@@ -53,33 +65,27 @@ final class UserEntity implements EntityInterface, JsonSerializable
         return  $user;
     }
 
-    private function __construct()
-    {
-    }
+    private function __construct() { }
 
     public function getArrayCopy(): array
     {
         return [
-            'id'        => (string) $this->getId(),
-            'name'      => $this->getName(),
-            'email'     => $this->getEmail(),
-            'password'  => $this->getPassword(),
-            'role'      => $this->getRole(),
-            'modified'  => $this->getModified()->format('Y-m-d H:i:s'),
-            'created'   => $this->getCreated()->format('Y-m-d H:i:s'),
+            'id'        => (string) $this->id,
+            'name'      => $this->name,
+            'email'     => $this->email,
+            'password'  => $this->password,
+            'role'      => $this->role,
+            'modified'  => $this->modified->format('Y-m-d H:i:s'),
+            'created'   => $this->created->format('Y-m-d H:i:s'),
         ];
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
-        return [
-            'id'        => (string) $this->getId(),
-            'name'      => $this->getName(),
-            'email'     => $this->getEmail(),
-            'role'      => $this->getRole(),
-            'modified'  => $this->getModified()->format('Y-m-d H:i:s'),
-            'created'   => $this->getCreated()->format('Y-m-d H:i:s'),
-        ];
+        $array = $this->getArrayCopy();
+        unset($array['password']);
+
+        return $array;
     }
 
     /**

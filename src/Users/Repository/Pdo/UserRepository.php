@@ -42,10 +42,10 @@ final class UserRepository implements UserRepositoryInterface
 
     /**
      * @param Uuid $uuid
-     * @return array
+     * @return UserEntity
      * @throws Exception
      */
-    public function find(Uuid $uuid): array
+    public function find(Uuid $uuid): UserEntity
     {
         $statement = $this->pdo->prepare(
             'SELECT * FROM `users` WHERE id=:id LIMIT 1'
@@ -58,7 +58,7 @@ final class UserRepository implements UserRepositoryInterface
             throw new Exception(sprintf('id: \'%s\' not found', $uuid));
         }
 
-        return $result;
+        return UserEntity::fromArray($result);
     }
 
     public function findAll(): array
@@ -68,7 +68,14 @@ final class UserRepository implements UserRepositoryInterface
         );
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        $result      = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $resultArray = [];
+
+        foreach ($result as $row) {
+            $resultArray[] = UserEntity::fromArray($row);
+        }
+
+        return $resultArray;
     }
 
     public function create(array $data): bool

@@ -4,38 +4,112 @@ declare(strict_types=1);
 
 namespace Cms\App\Filter;
 
+use Cms\App\Entity\DtoInterface;
+
 class InputFilter
 {
     protected string $object;
-    protected array $filterDefinition;
+    protected array $sanitizeDefinition;
     protected array $validateDefinition;
+    protected array $dirtyData;
+    protected array $cleanData;
+    private array $errors;
+    private bool $isValid = false;
+    private bool $hasBeenValidated = false;
 
-    public function getData(): object
+    public function __construct(array $data)
     {
-
+        $this->dirtyData = $data;
+        $this->sanitize();
     }
 
-    public function validate() {}
-
-    public function filter(array $data): array
+    public function getData(): DtoInterface
     {
-        $returnData = [];
+        $object = new $this->object;
 
-        foreach ($data as $key => $value) {
-            $filters = $this->filterDefinition[$key];
-            $sanitisedValue = $value;
-
-            foreach ($filters as $filter) {
-                $filterName = $filter['filter'];
-                $options = [
-                    'options' => $filter['options'] ?? null,
-                    'flags'   => $filter['flags'] ?? null,
-                ];
-                $sanitisedValue = filter_var($sanitisedValue, $filterName, $options);
-                $returnData[$key] = $sanitisedValue;
+        foreach ($this->cleanData as $key => $value) {
+            if (property_exists($object, $key)) {
+                $object->{$key} = $value;
             }
         }
 
-        return $returnData;
+        return $object;
+    }
+
+    public function isValid(): bool
+    {
+        if (!$this->hasBeenValidated) {
+            $this->validate();
+        }
+
+        return $this->isValid;
+    }
+
+    private function validate(): void
+    {
+        foreach ($this->cleanData as $key => $value) {
+            $validators     = $this->validateDefinition[$key];
+            $inputErrors    = $this->validateArray($value, $validators);
+
+            if (in_array(false, $inputErrors)) {
+                $this->setErrorMessage($key, $inputErrors);
+                $this->errors[$key] = $inputErrors;
+            }
+        }
+
+        $this->isValid = empty($this->errors);
+        $this->hasBeenValidated = true;
+    }
+
+    private function validateArray(string $value, array $validators)
+    {
+        $errors = [];
+
+        foreach ($validators as $key => $validator) {
+            $errors[$key] = $this->filter($value, $validator);
+        }
+
+        return $errors;
+    }
+
+    private function sanitize(): void
+    {
+        $cleanData = [];
+
+        foreach ($this->dirtyData as $key => $value) {
+            $sanitizers         = $this->sanitizeDefinition[$key];
+            $cleanData[$key]    = $this->sanitizeArray($value, $sanitizers);
+        }
+
+        $this->cleanData = $cleanData;
+    }
+
+    private function sanitizeArray(string $value, array $sanitizers)
+    {
+        foreach ($sanitizers as $sanitizer) {
+            $value = $this->filter($value, $sanitizer);
+        }
+
+        return $value;
+    }
+
+    private function filter(string $value, array $filter)
+    {
+        $filterName = $filter['filter'];
+        $options    = [
+            'options' => $filter['options'] ?? null,
+            'flags'   => $filter['flags'] ?? null,
+        ];
+
+        return filter_var($value, $filterName, $options);
+    }
+
+    private function setErrorMessage(string $input, array $inputErrors): void
+    {
+        foreach ($inputErrors as $key => $value) {
+            if (!$value) {
+                $this->cleanData['errors'][$input][] = $this->validateDefinition[$input][$key]['error_message'];
+            }
+        }
     }
 }

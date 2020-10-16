@@ -19,7 +19,7 @@ final class ManagerInputFilterMiddleware implements MiddlewareInterface
         RequestHandlerInterface $handler
     ): ResponseInterface {
         $requestBody    = $request->getParsedBody();
-        $cleanData      = (new ManagerInputFilter())->filter($requestBody);
+        $cleanData      = new ManagerInputFilter($requestBody);
         $dto            = new ManagerDto($cleanData['name'], $cleanData['email']);
         $request        = $request->withAttribute(ManagerEntity::class, $dto);
 
