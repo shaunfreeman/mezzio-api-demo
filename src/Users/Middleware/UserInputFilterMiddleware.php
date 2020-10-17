@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Cms\Users\Middleware;
 
-use Closure;
-use Cms\App\Stdlib\ProblemDetailsTrait;
 use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -16,20 +14,10 @@ use Cms\Users\Filter\UserInputFilter;
 
 final class UserInputFilterMiddleware implements MiddlewareInterface
 {
-    use ProblemDetailsTrait;
-
-    private Closure $responseFactory;
-
     private ProblemDetailsResponseFactory $problemDetailsFactory;
 
-    public function __construct(
-        callable $responseFactory,
-        ProblemDetailsResponseFactory $problemDetailsFactory
-    ) {
-        // Factories is wrapped in a closure in order to enforce return type safety.
-        $this->responseFactory = function () use ($responseFactory) : ResponseInterface {
-            return $responseFactory();
-        };
+    public function __construct(ProblemDetailsResponseFactory $problemDetailsFactory)
+    {
         $this->problemDetailsFactory = $problemDetailsFactory;
     }
 
@@ -42,13 +30,16 @@ final class UserInputFilterMiddleware implements MiddlewareInterface
         $filter         = new UserInputFilter($requestBody);
 
         if (!$filter->isValid()) {
-            $response   = ($this->responseFactory)();
-            $response   = $response->withStatus(400);
-            $data       = $filter->getData();
-            return $this->processError($request, $response, [
-                'message'           => 'User Validation Error.',
-                'error_messages'    => $data->getErrors(),
-            ]);
+            $data = $filter->getData();
+
+            return $this->problemDetailsFactory->createResponse(
+                $request,
+                422,
+                'User Validation Error.',
+                '',
+                '',
+                ['error_messages' => $data->getErrors()]
+            );
         }
 
         $request = $request->withAttribute(UserEntity::class, $filter->getData());

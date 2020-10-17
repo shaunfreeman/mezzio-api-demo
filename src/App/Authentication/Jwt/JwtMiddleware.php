@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Cms\App\Authentication\Jwt;
 
-use Closure;
 use Exception;
 use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 use Psr\Http\Message\ResponseInterface;
@@ -13,27 +12,17 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use RuntimeException;
 use Cms\App\Authentication\Identity;
-use Cms\App\Stdlib\ProblemDetailsTrait;
 
 final class JwtMiddleware implements MiddlewareInterface
 {
-    use ProblemDetailsTrait;
+    private ProblemDetailsResponseFactory $problemDetailsFactory;
 
     private Jwt $jwt;
 
-    private Closure $responseFactory;
-
-    public function __construct(
-        callable $responseFactory,
-        ProblemDetailsResponseFactory $problemDetailsFactory,
-        Jwt $jwt
-    ) {
-        // Factories is wrapped in a closure in order to enforce return type safety.
-        $this->responseFactory = function () use ($responseFactory) : ResponseInterface {
-            return $responseFactory();
-        };
-        $this->problemDetailsFactory = $problemDetailsFactory;
-        $this->jwt = $jwt;
+    public function __construct(ProblemDetailsResponseFactory $problemDetailsFactory, Jwt $jwt)
+    {
+        $this->problemDetailsFactory    = $problemDetailsFactory;
+        $this->jwt                      = $jwt;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -45,19 +34,19 @@ final class JwtMiddleware implements MiddlewareInterface
 
         $scheme     = $request->getUri()->getScheme();
         $host       = $request->getUri()->getHost();
-        $response   = ($this->responseFactory)();
         $config     = $this->jwt->getConfig();
 
         /* HTTP allowed only if secure is false or server is in relaxed array. */
         if ('https' !== $scheme && true === $config->isSecure()) {
             if (!in_array($host, $config->getRelaxed())) {
-                $response = $response->withStatus(401);
-                return $this->processError($request, $response, [
-                    'message' => sprintf(
-                        'Insecure use of middleware over %s denied by configuration.',
-                        $host
-                    )
-                ]);
+                return $this->problemDetailsFactory->createResponse(
+                    $request,
+                    401,
+                    sprintf('Insecure use of middleware over %s denied by configuration.', $host),
+                    '',
+                    '',
+                    []
+                );
             }
         }
 
@@ -66,11 +55,14 @@ final class JwtMiddleware implements MiddlewareInterface
             $token      = $this->fetchToken($request);
             $payload    = Payload::fromArray($this->jwt->decodeToken($token));
         } catch (RuntimeException | Exception $exception) {
-            $response   = $response->withStatus(401);
-            return $this->processError($request, $response, [
-                'message'   => $exception->getMessage(),
-                'uri'       => (string) $request->getUri()
-            ]);
+            return $this->problemDetailsFactory->createResponse(
+                $request,
+                401,
+                $exception->getMessage(),
+                '',
+                '',
+                ['uri' => (string) $request->getUri()]
+            );
         }
 
         /* Add payload token to request as attribute when requested. */

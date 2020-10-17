@@ -26,8 +26,8 @@ final class AuthenticationHandler implements RequestHandlerInterface
         ProblemDetailsResponseFactory $problemDetailsFactory
     ) {
         $this->problemDetailsFactory    = $problemDetailsFactory;
-        $this->auth = $auth;
-        $this->jwt = $jwt;
+        $this->auth                     = $auth;
+        $this->jwt                      = $jwt;
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
@@ -38,18 +38,17 @@ final class AuthenticationHandler implements RequestHandlerInterface
             $identity = $this->auth
                 ->authenticate($credentials['email'], $credentials['password']);
         } catch (Exception $exception) {
-            return $this->problemDetailsFactory
-                ->createResponse(
-                    $request,
-                    401,
-                    $exception->getMessage(),
-                    'Failed validating credentials.'
-                );
+            return $this->problemDetailsFactory->createResponse(
+                $request,
+                401,
+                $exception->getMessage(),
+                'Failed validating credentials.',
+                ''
+            );
         }
 
         return new JsonResponse([
-            'token' => $this->jwt
-                ->createToken($identity),
+            'token' => $this->jwt->createToken($identity),
         ]);
     }
 }

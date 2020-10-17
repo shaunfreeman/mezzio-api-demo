@@ -6,7 +6,6 @@ namespace Cms\App\Authentication\Jwt;
 
 use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 use Psr\Container\ContainerInterface;
-use Psr\Http\Message\ResponseInterface;
 
 final class JwtMiddlewareFactory
 {
@@ -17,7 +16,6 @@ final class JwtMiddlewareFactory
         );
 
         return new JwtMiddleware(
-            $container->get(ResponseInterface::class),
             $container->get(ProblemDetailsResponseFactory::class),
             $jwt
         );

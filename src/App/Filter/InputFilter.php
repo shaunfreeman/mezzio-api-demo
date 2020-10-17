@@ -13,7 +13,6 @@ class InputFilter
     protected array $validateDefinition;
     protected array $dirtyData;
     protected array $cleanData;
-    private array $errors;
     private bool $isValid = false;
     private bool $hasBeenValidated = false;
 
@@ -47,17 +46,19 @@ class InputFilter
 
     private function validate(): void
     {
+        $errors = [];
+
         foreach ($this->cleanData as $key => $value) {
             $validators     = $this->validateDefinition[$key];
             $inputErrors    = $this->validateArray($value, $validators);
 
             if (in_array(false, $inputErrors)) {
                 $this->setErrorMessage($key, $inputErrors);
-                $this->errors[$key] = $inputErrors;
+                $errors[$key] = $inputErrors;
             }
         }
 
-        $this->isValid = empty($this->errors);
+        $this->isValid = empty($errors);
         $this->hasBeenValidated = true;
     }
 

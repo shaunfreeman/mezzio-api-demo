@@ -13,12 +13,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Cms\App\Stdlib\ProblemDetailsTrait;
 
 final class CorsMiddleware implements MiddlewareInterface
 {
-    use ProblemDetailsTrait;
-
     private array $options = [
         "origin" => [],
         "methods" => [],
@@ -30,6 +27,8 @@ final class CorsMiddleware implements MiddlewareInterface
     ];
 
     private Closure $responseFactory;
+
+    private ProblemDetailsResponseFactory $problemDetailsFactory;
 
     public function __construct(
         callable $responseFactory,
@@ -110,5 +109,17 @@ final class CorsMiddleware implements MiddlewareInterface
                 implode(",", $headers[CorsResponseHeaders::EXPOSE_HEADERS]);
         }
         return $headers;
+    }
+
+    private function processError(ServerRequestInterface $request, ResponseInterface $response, array $arguments = null)
+    {
+        return $this->problemDetailsFactory->createResponse(
+            $request,
+            $response->getStatusCode(),
+            $arguments['message'],
+            $response->getReasonPhrase(),
+            '',
+            []
+        );
     }
 }
