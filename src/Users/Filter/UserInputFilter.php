@@ -8,17 +8,27 @@ use Cms\App\Entity\DtoInterface;
 use Cms\App\Filter\InputFilter;
 use Cms\App\Filter\Sanitizer;
 use Cms\App\Filter\Validator;
+use Cms\App\ValueObject\Uuid;
 use Cms\Users\Entity\UserDto;
 use Cms\Users\Entity\UserEntity;
+use Cms\Users\Repository\UserRepositoryInterface;
 use Cms\Users\ValueObject\Password;
+use PDOException;
 
 
 final class UserInputFilter extends InputFilter
 {
     protected string $object = UserDto::class;
 
-    public function __construct(array $data)
+    private UserRepositoryInterface $userRepository;
+
+    private ?Uuid $uuid;
+
+    public function __construct(array $data, UserRepositoryInterface $userRepository, ?Uuid $uuid)
     {
+        $this->uuid             = $uuid;
+        $this->userRepository   = $userRepository;
+
         $this->validateDefinition = [
             'name' => [
                 [
@@ -39,11 +49,16 @@ final class UserInputFilter extends InputFilter
                     'error_message' => 'Email is required.',
                 ],
                 ['filter' => FILTER_VALIDATE_EMAIL, 'error_message' => 'Email is not a valid email address.'],
+                [
+                    'filter' => FILTER_CALLBACK,
+                    'options' => [$this, 'validateUniqueEmail'],
+                    'error_message' => 'Email address already taken.'
+                ],
             ],
             'password' => [
                 [
                     'filter'        => FILTER_CALLBACK,
-                    'options'       => [UserInputFilter::class, 'validatePassword'],
+                    'options'       => [$this, 'validatePassword'],
                     'error_message' => 'Password must contain at least 1 uppercase, 1 lowercase, 1 digit and 1 special '
                                        . 'character and be at least 8 characters long.',
                 ],
@@ -89,7 +104,25 @@ final class UserInputFilter extends InputFilter
         return parent::getData();
     }
 
-    public static function validatePassword(string $value): bool
+    protected function validateUniqueEmail(string $value): bool
+    {
+        $currentEmail = '';
+
+        if ($this->uuid instanceof Uuid) {
+            $user           = $this->userRepository->find($this->uuid);
+            $currentEmail   = $user->getEmail();
+        }
+
+        try {
+            $this->userRepository->findByEmail($value, $currentEmail);
+        } catch (PDOException $exception) {
+            return true;
+        }
+
+        return false;
+    }
+
+    protected function validatePassword(string $value): bool
     {
         $result = true;
 

@@ -16,12 +16,8 @@ final class Password
         return password_verify($inputPassword, $password);
     }
 
-    public static function checkHash(string $password): string
+    public static function checkHash(string $password): bool
     {
-        if (password_needs_rehash($password, PASSWORD_DEFAULT)) {
-            $password = self::hash($password);
-        }
-
-        return $password;
+        return password_needs_rehash($password, PASSWORD_DEFAULT);
     }
 }

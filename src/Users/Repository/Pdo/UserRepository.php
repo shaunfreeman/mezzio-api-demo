@@ -22,19 +22,20 @@ final class UserRepository implements UserRepositoryInterface
 
     /**
      * @param string $email
+     * @param string $ignore
      * @return UserEntity
      * @throws Exception
      */
-    public function findByEmail(string $email): UserEntity
+    public function findByEmail(string $email, string $ignore = ''): UserEntity
     {
         $statement = $this->pdo->prepare(
-            'SELECT * FROM `users` WHERE email=:email LIMIT 1'
+            'SELECT * FROM `users` WHERE email = :email AND email <> :ignore LIMIT 1'
         );
-        $statement->execute([ 'email' => $email ]);
+        $statement->execute([ 'email' => $email, 'ignore' => $ignore ]);
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         if (!$result) {
-            throw new PDOException(sprintf('\'%s\' is not found in database.', $email));
+            throw new PDOException(sprintf('%s is not found in database.', $email));
         }
 
         return UserEntity::fromArray($result);
@@ -48,19 +49,23 @@ final class UserRepository implements UserRepositoryInterface
     public function find(Uuid $uuid): UserEntity
     {
         $statement = $this->pdo->prepare(
-            'SELECT * FROM `users` WHERE id=:id LIMIT 1'
+            'SELECT * FROM `users` WHERE id = :id LIMIT 1'
         );
         $statement->execute([ 'id' => (string) $uuid ]);
 
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         if (false === $result) {
-            throw new Exception(sprintf('id: \'%s\' not found', $uuid));
+            throw new Exception(sprintf('id: %s not found', $uuid));
         }
 
         return UserEntity::fromArray($result);
     }
 
+    /**
+     * @return array
+     * @throws Exception
+     */
     public function findAll(): array
     {
         $statement = $this->pdo->prepare(
@@ -116,7 +121,7 @@ final class UserRepository implements UserRepositoryInterface
     public function delete(Uuid $uuid): bool
     {
         $statement = $this->pdo->prepare(
-            'DELETE FROM `users` WHERE id=:id'
+            'DELETE FROM `users` WHERE id = :id'
         );
         $statement->execute([ 'id' => (string) $uuid ]);
 

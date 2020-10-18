@@ -9,7 +9,7 @@ use Cms\Users\Entity\UserEntity;
 
 interface UserRepositoryInterface
 {
-    public function findByEmail(string $email): UserEntity;
+    public function findByEmail(string $email, string $ignore = ''): UserEntity;
 
     public function find(Uuid $uuid): UserEntity;
 
