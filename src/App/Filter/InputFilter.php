@@ -50,7 +50,7 @@ class InputFilter
 
         foreach ($this->cleanData as $key => $value) {
             $validators     = $this->validateDefinition[$key];
-            $inputErrors    = $this->validateArray($value, $validators);
+            $inputErrors    = $this->validateValue($value, $validators);
 
             if (in_array(false, $inputErrors)) {
                 $this->setErrorMessage($key, $inputErrors);
@@ -62,7 +62,7 @@ class InputFilter
         $this->hasBeenValidated = true;
     }
 
-    private function validateArray(string $value, array $validators)
+    private function validateValue(string $value, array $validators)
     {
         $errors = [];
 
@@ -79,13 +79,13 @@ class InputFilter
 
         foreach ($this->dirtyData as $key => $value) {
             $sanitizers         = $this->sanitizeDefinition[$key];
-            $cleanData[$key]    = $this->sanitizeArray($value, $sanitizers);
+            $cleanData[$key]    = $this->sanitizeValue($value, $sanitizers);
         }
 
         $this->cleanData = $cleanData;
     }
 
-    private function sanitizeArray(string $value, array $sanitizers)
+    private function sanitizeValue(string $value, array $sanitizers)
     {
         foreach ($sanitizers as $sanitizer) {
             $value = $this->filter($value, $sanitizer);
