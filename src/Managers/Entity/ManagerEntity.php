@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Cms\Managers\Entity;
 
+
 use DateTimeImmutable;
 use Exception;
 use Cms\App\Entity\EntityInterface;
 use Cms\App\ValueObject\Uuid;
+use JsonSerializable;
 
-final class ManagerEntity implements EntityInterface
+final class ManagerEntity implements EntityInterface, JsonSerializable
 {
     private Uuid $id;
     private string $name;
@@ -33,9 +35,17 @@ final class ManagerEntity implements EntityInterface
         return $manager;
     }
 
-    private function __construct()
+    public function updateFromDto(ManagerDto $dto): ManagerEntity
     {
+        $manager            = clone $this;
+        $manager->name      = $dto->name;
+        $manager->email     = $dto->email;
+        $manager->modified  = new DateTimeImmutable('now');
+
+        return $manager;
     }
+
+    private function __construct() { }
 
     public function getArrayCopy(): array
     {
@@ -48,14 +58,9 @@ final class ManagerEntity implements EntityInterface
         ];
     }
 
-    public function updateFromDto(ManagerDto $dto): ManagerEntity
+    public function jsonSerialize(): array
     {
-        $manager            = clone $this;
-        $manager->name      = $dto->name;
-        $manager->email     = $dto->email;
-        $manager->modified  = new DateTimeImmutable('now');
-
-        return $manager;
+        return $this->getArrayCopy();
     }
 
     public function getId(): Uuid

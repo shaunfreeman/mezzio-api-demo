@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace Cms\Managers\Repository;
 
 use Cms\App\ValueObject\Uuid;
+use Cms\Managers\Entity\ManagerEntity;
 
 interface ManagerRepositoryInterface
 {
-    public function find(Uuid $uuid): array;
+    public function findByEmail(string $email, string $ignore = ''): ManagerEntity;
+
+    public function find(Uuid $uuid): ManagerEntity;
 
     public function findAll(): array;
 

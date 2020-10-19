@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace Cms\Managers\Entity;
 
-final class ManagerDto
+
+use Cms\App\Entity\DtoInterface;
+
+final class ManagerDto implements DtoInterface
 {
     public string $name;
     public string $email;
+    public array $errors;
 
-    public function __construct(string $name, string $email)
+    public function getErrors(): array
     {
-        $this->name     = $name;
-        $this->email    = $email;
+        return $this->errors;
     }
 }

@@ -34,10 +34,10 @@ final class ConfigProvider
                     Handler\UserReadHandlerFactory::class,
                 Handler\UserUpdateHandler::class =>
                     Handler\UserUpdateHandlerFactory::class,
-                Repository\UserRepositoryInterface::class =>
-                    Repository\Pdo\UserRepositoryFactory::class,
                 Middleware\UserInputFilterMiddleware::class =>
                     Middleware\UserInputFilterMiddlewareFactory::class,
+                Repository\UserRepositoryInterface::class =>
+                    Repository\Pdo\UserRepositoryFactory::class,
             ]
         ];
     }

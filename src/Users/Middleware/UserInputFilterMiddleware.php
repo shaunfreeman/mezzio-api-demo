@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Cms\Users\Middleware;
 
+
 use Cms\App\ValueObject\Uuid;
 use Cms\Users\Repository\UserRepositoryInterface;
 use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;

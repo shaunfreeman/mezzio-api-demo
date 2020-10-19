@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Cms\Managers\Repository\Pdo;
 
+use Cms\Managers\Entity\ManagerEntity;
 use Exception;
 use PDO;
 use Cms\App\ValueObject\Uuid;
 use Cms\Managers\Repository\ManagerRepositoryInterface;
+use PDOException;
 
 final class ManagerRepository implements ManagerRepositoryInterface
 {
@@ -18,13 +20,27 @@ final class ManagerRepository implements ManagerRepositoryInterface
         $this->pdo = $pdo;
     }
 
+    public function findByEmail(string $email, string $ignore = ''): ManagerEntity
+    {
+        $statement = $this->pdo->prepare(
+            'SELECT * FROM `managers` WHERE email = :email AND email <> :ignore LIMIT 1'
+        );
+        $statement->execute([ 'email' => $email, 'ignore' => $ignore ]);
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if (!$result) {
+            throw new PDOException(sprintf('%s is not found in database.', $email));
+        }
+
+        return ManagerEntity::fromArray($result);
+    }
+
     /**
      * @param Uuid $uuid
-     *
-     * @return array
+     * @return ManagerEntity
      * @throws Exception
      */
-    public function find(Uuid $uuid): array
+    public function find(Uuid $uuid): ManagerEntity
     {
         $statement = $this->pdo->prepare(
             'SELECT * FROM `managers` WHERE id=:id LIMIT 1'
@@ -34,10 +50,10 @@ final class ManagerRepository implements ManagerRepositoryInterface
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         if (false === $result) {
-            throw new Exception(sprintf('id: \'%s\' not found', $uuid));
+            throw new Exception(sprintf('id: %s not found', $uuid));
         }
 
-        return $result;
+        return ManagerEntity::fromArray($result);
     }
 
     public function findAll(): array
@@ -47,7 +63,14 @@ final class ManagerRepository implements ManagerRepositoryInterface
         );
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        $result      = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $resultArray = [];
+
+        foreach ($result as $row) {
+            $resultArray[] = ManagerEntity::fromArray($row);
+        }
+
+        return $resultArray;
     }
 
     public function create(array $data): bool

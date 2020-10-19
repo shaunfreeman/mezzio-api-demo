@@ -37,7 +37,6 @@ final class ManagerUpdateHandler implements RequestHandlerInterface
                 $request->getAttribute(Uuid::class)
             );
 
-            $manager = ManagerEntity::fromArray($manager);
             $manager = $manager->updateFromDto($data);
 
             if (!$this->managerRepository->update($manager->getArrayCopy())) {
@@ -56,6 +55,6 @@ final class ManagerUpdateHandler implements RequestHandlerInterface
                 );
         }
 
-        return new JsonResponse($manager->getArrayCopy());
+        return new JsonResponse($manager);
     }
 }

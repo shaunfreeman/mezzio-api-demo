@@ -37,6 +37,8 @@ final class ConfigProvider
                     Handler\ManagerUpdateHandlerFactory::class,
                 Handler\ManagerDeleteHandler::class =>
                     Handler\ManagerDeleteHandlerFactory::class,
+                Middleware\ManagerInputFilterMiddleware::class =>
+                    Middleware\ManagerInputFilterMiddlewareFactory::class,
                 Repository\ManagerRepositoryInterface::class =>
                     Repository\Pdo\ManagerRepositoryFactory::class,
             ],

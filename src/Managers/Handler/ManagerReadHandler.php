@@ -11,7 +11,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Cms\App\ValueObject\Uuid;
-use Cms\Managers\Entity\ManagerEntity;
 use Cms\Managers\Repository\ManagerRepositoryInterface;
 
 final class ManagerReadHandler implements RequestHandlerInterface
@@ -33,8 +32,7 @@ final class ManagerReadHandler implements RequestHandlerInterface
         $uuid = $request->getAttribute(Uuid::class);
 
         try {
-            $result     = $this->managerRepository->find($uuid);
-            $manager    = ManagerEntity::fromArray($result);
+            $manager = $this->managerRepository->find($uuid);
         } catch (Exception $exception) {
             return $this->responseFactory
                 ->createResponse(
@@ -45,6 +43,6 @@ final class ManagerReadHandler implements RequestHandlerInterface
                 );
         }
 
-        return new JsonResponse($manager->getArrayCopy());
+        return new JsonResponse($manager);
     }
 }
