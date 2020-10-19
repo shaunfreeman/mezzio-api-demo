@@ -31,8 +31,8 @@ final class UuidMiddleware implements MiddlewareInterface
             return $this->problemDetailsFactory->createResponse(
                 $request,
                 400,
-                'Malformed id.',
-                '',
+                $exception->getMessage(),
+                'Invalid UUID ',
                 '',
                 []
             );

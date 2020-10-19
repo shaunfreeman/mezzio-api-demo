@@ -51,7 +51,7 @@ final class Uuid implements JsonSerializable
     private function validateAndNormalise(string $uuid): string
     {
         if (preg_match(self::UUID_REGEX, $uuid, $matches) !== 1) {
-            throw new InvalidArgumentException(sprintf('Uuid "%s" is not a valid uuid.', $uuid));
+            throw new InvalidArgumentException(sprintf('Uuid %s is not a valid uuid.', $uuid));
         }
 
         array_shift($matches);
