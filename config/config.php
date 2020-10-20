@@ -13,6 +13,7 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
+    \Mezzio\Helper\ConfigProvider::class,
     \Cms\Managers\ConfigProvider::class,
     \Cms\Orders\ConfigProvider::class,
     \Cms\Users\ConfigProvider::class,
@@ -21,7 +22,6 @@ $aggregator = new ConfigAggregator([
     \Mezzio\Router\FastRouteRouter\ConfigProvider::class,
     // Include cache configuration
     new ArrayProvider($cacheConfig),
-    \Mezzio\Helper\ConfigProvider::class,
     \Mezzio\ConfigProvider::class,
     \Mezzio\Router\ConfigProvider::class,
     // Default App module config

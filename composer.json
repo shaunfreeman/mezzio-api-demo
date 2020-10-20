@@ -15,8 +15,8 @@
   ],
   "homepage": "https://mezzio.dev",
   "support": {
-    "issues": "https://github.com/titan-refurbishments/tr-api/issues",
-    "source": "https://github.com/titan-refurbishments/tr-api/"
+    "issues": "https://github.com/shaunfreeman/mezzio-api-demo/issues",
+    "source": "https://github.com/shaunfreeman/mezzio-api-demo/"
   },
   "config": {
     "sort-packages": true
@@ -40,12 +40,9 @@
     "firebase/php-jwt": "^5.2",
     "laminas/laminas-component-installer": "^2.1.1",
     "laminas/laminas-config-aggregator": "^1.0",
-    "laminas/laminas-diactoros": "^1.7.1 || ^2.0",
     "laminas/laminas-servicemanager": "^3.3",
-    "laminas/laminas-stdlib": "^3.1",
     "mezzio/mezzio": "^3.0.1",
     "mezzio/mezzio-fastroute": "^3.0",
-    "mezzio/mezzio-hal": "^1.3",
     "mezzio/mezzio-helpers": "^5.0",
     "mezzio/mezzio-problem-details": "^1.1",
     "neomerx/cors-psr7": "^2.0"
