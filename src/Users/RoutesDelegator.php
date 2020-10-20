@@ -18,6 +18,10 @@ final class RoutesDelegator
     {
         /** @var Application $app */
         $app = $callback();
+        $app->get('/users/choices', [
+            JwtMiddleware::class,
+            Handler\UserChoicesHandler::class
+        ], 'users.choices');
         $app->get('/users', [
             JwtMiddleware::class,
             Handler\UserCollectionHandler::class

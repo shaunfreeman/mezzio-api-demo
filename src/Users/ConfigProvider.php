@@ -23,6 +23,10 @@ final class ConfigProvider
                     RoutesDelegator::class,
                 ],
             ],
+            'invokables' => [
+                Handler\UserChoicesHandler::class =>
+                    Handler\UserChoicesHandler::class,
+            ],
             'factories' => [
                 Handler\UserCollectionHandler::class =>
                     Handler\UserCollectionHandlerFactory::class,

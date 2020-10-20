@@ -30,8 +30,6 @@ final class UserEntity implements EntityInterface, JsonSerializable
     private DateTimeImmutable $modified;
     private DateTimeImmutable $created;
 
-
-
     /**
      * @param array $data
      * @return UserEntity
@@ -86,6 +84,17 @@ final class UserEntity implements EntityInterface, JsonSerializable
         unset($array['password']);
 
         return $array;
+    }
+
+    public static function getChoices(): array
+    {
+        $choices = [];
+
+        foreach (self::USER_ROLES as $value => $label) {
+            $choices[] = ['label' => $label, 'value' => $value];
+        }
+
+        return $choices;
     }
 
     /**

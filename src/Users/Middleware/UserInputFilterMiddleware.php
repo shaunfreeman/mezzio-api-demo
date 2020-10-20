@@ -21,16 +21,16 @@ final class UserInputFilterMiddleware implements MiddlewareInterface
 
     private UserRepositoryInterface $userRepository;
 
-    public function __construct(ProblemDetailsResponseFactory $problemDetailsFactory, UserRepositoryInterface $userRepository)
-    {
+    public function __construct(
+        ProblemDetailsResponseFactory $problemDetailsFactory,
+        UserRepositoryInterface $userRepository
+    ) {
         $this->problemDetailsFactory    = $problemDetailsFactory;
         $this->userRepository           = $userRepository;
     }
 
-    public function process(
-        ServerRequestInterface $request,
-        RequestHandlerInterface $handler
-    ): ResponseInterface {
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
         $filter = new UserInputFilter(
             $request->getParsedBody(),
             $this->userRepository,
