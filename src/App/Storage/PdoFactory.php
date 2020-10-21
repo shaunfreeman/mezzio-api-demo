@@ -30,8 +30,9 @@ final class PdoFactory
                 $dbOptions['port'],
                 $dbOptions['charset']
             ), $dbOptions['user'], $dbOptions['password'], [
-                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES      => false,
+                PDO::ATTR_ERRMODE               => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE    => PDO::FETCH_ASSOC,
             ]);
         } catch (PDOException $exception) {
             throw new ErrorException(sprintf(

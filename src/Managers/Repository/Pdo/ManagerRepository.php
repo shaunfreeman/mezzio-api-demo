@@ -26,7 +26,7 @@ final class ManagerRepository implements ManagerRepositoryInterface
             'SELECT * FROM `managers` WHERE email = :email AND email <> :ignore LIMIT 1'
         );
         $statement->execute([ 'email' => $email, 'ignore' => $ignore ]);
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        $result = $statement->fetch();
 
         if (!$result) {
             throw new PDOException(sprintf('%s is not found in database.', $email));
@@ -47,7 +47,7 @@ final class ManagerRepository implements ManagerRepositoryInterface
         );
         $statement->execute([ 'id' => (string) $uuid ]);
 
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        $result = $statement->fetch();
 
         if (false === $result) {
             throw new Exception(sprintf('id: %s not found', $uuid));
@@ -63,7 +63,7 @@ final class ManagerRepository implements ManagerRepositoryInterface
         );
         $statement->execute();
 
-        $result      = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $result      = $statement->fetchAll();
         $resultArray = [];
 
         foreach ($result as $row) {
