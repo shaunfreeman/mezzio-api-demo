@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Cms\Orders\Entity;
 
+
 use Cms\App\Entity\EntityInterface;
 use Cms\App\ValueObject\Uuid;
 use DateTimeImmutable;
+use JsonSerializable;
 
-final class OrderEntity implements EntityInterface
+final class OrderEntity implements EntityInterface, JsonSerializable
 {
     private Uuid $id;
     private string $claimNumber;
@@ -19,8 +21,10 @@ final class OrderEntity implements EntityInterface
 
     public static function fromArray(array $data): OrderEntity
     {
-        // TODO: Implement fromArray() method.
+       return new static();
     }
+
+    private function __construct() {}
 
     public function getArrayCopy(): array
     {
@@ -32,6 +36,11 @@ final class OrderEntity implements EntityInterface
             'modified'      => $this->modified->format('Y-m-d H:i:s'),
             'created'       => $this->created->format('Y-m-d H:i:s'),
         ];
+    }
+
+    public function jsonSerialize(): array
+    {
+        return $this->getArrayCopy();
     }
 }
 

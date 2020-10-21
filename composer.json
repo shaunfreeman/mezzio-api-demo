@@ -40,7 +40,6 @@
     "firebase/php-jwt": "^5.2",
     "laminas/laminas-component-installer": "^2.1.1",
     "laminas/laminas-config-aggregator": "^1.0",
-    "laminas/laminas-httphandlerrunner": "^1.0",
     "laminas/laminas-servicemanager": "^3.3",
     "mezzio/mezzio": "^3.0.1",
     "mezzio/mezzio-fastroute": "^3.0",
