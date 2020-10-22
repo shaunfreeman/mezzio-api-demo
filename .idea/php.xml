@@ -106,14 +106,14 @@
   <component name="PhpInterpretersPhpInfoCache">
     <phpInfoCache>
       <interpreter name="php-cli">
-        <phpinfo binary_type="PHP" php_cli="/usr/local/bin/php" path_separator=":" version="7.4.8">
+        <phpinfo binary_type="PHP" php_cli="/usr/local/bin/php" path_separator=":" version="7.4.11">
           <additional_php_ini>/usr/local/etc/conf.d/mysql_xdevapi.ini, /usr/local/etc/conf.d/uopz.ini, /usr/local/etc/conf.d/xdebug.ini</additional_php_ini>
           <configuration_file>/usr/local/etc/php.ini</configuration_file>
           <configuration_options>
             <configuration_option name="include_path" value=".:" />
           </configuration_options>
           <debuggers>
-            <debugger_info debugger="xdebug" debugger_version="2.9.6">
+            <debugger_info debugger="xdebug" debugger_version="2.9.7">
               <debug_extensions />
             </debugger_info>
           </debuggers>
@@ -168,7 +168,7 @@
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
   <component name="PhpUnit">
     <phpunit_settings>
-      <phpunit_by_interpreter interpreter_id="e1cac4f8-e5e5-4218-8da8-f69502c4493f" configuration_file_path="/home/cms/phpunit.xml.dist" custom_loader_path="/home/cms/vendor/autoload.php" use_configuration_file="true" />
+      <phpunit_by_interpreter interpreter_id="e1cac4f8-e5e5-4218-8da8-f69502c4493f" configuration_file_path="/home/cms/phpunit.xml.dist" custom_loader_path="/home/cms/vendor/autoload.php" phpunit_phar_path="" use_configuration_file="true" />
     </phpunit_settings>
   </component>
 </project>
