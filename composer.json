@@ -45,7 +45,8 @@
     "mezzio/mezzio-fastroute": "^3.0",
     "mezzio/mezzio-helpers": "^5.0",
     "mezzio/mezzio-problem-details": "^1.1",
-    "neomerx/cors-psr7": "^2.0"
+    "neomerx/cors-psr7": "^2.0",
+    "ocramius/package-versions": "^1.9"
   },
   "require-dev": {
     "laminas/laminas-development-mode": "^3.1",
