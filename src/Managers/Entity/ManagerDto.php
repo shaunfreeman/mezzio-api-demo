@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Cms\Managers\Entity;
 
-
 use Cms\App\Entity\DtoInterface;
 
 final class ManagerDto implements DtoInterface

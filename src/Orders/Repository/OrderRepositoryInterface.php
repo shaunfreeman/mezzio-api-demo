@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Cms\Orders\Repository;
 
-use Cms\App\Entity\EntityInterface;
 use Cms\App\ValueObject\Uuid;
 use Cms\Orders\Entity\OrderEntity;
 
@@ -18,4 +17,3 @@ interface OrderRepositoryInterface
 
     public function delete(Uuid $uuid): bool;
 }
-

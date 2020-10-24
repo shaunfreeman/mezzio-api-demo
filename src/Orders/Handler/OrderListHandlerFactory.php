@@ -9,7 +9,7 @@ use Cms\Orders\Repository\OrderRepositoryInterface;
 
 final class OrderListHandlerFactory
 {
-    public function __invoke(ContainerInterface $container) : OrderListHandler
+    public function __invoke(ContainerInterface $container): OrderListHandler
     {
         $orderRepository = $container->get(OrderRepositoryInterface::class);
 

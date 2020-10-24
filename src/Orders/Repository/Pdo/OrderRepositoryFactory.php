@@ -16,4 +16,3 @@ final class OrderRepositoryFactory
         return new OrderRepository($pdo);
     }
 }
-

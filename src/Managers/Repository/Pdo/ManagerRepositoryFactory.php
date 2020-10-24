@@ -16,4 +16,3 @@ final class ManagerRepositoryFactory
         return new ManagerRepository($pdo);
     }
 }
-

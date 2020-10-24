@@ -37,7 +37,7 @@ final class CorsMiddleware implements MiddlewareInterface
     ) {
 
         // Factories is wrapped in a closure in order to enforce return type safety.
-        $this->responseFactory = function () use ($responseFactory) : ResponseInterface {
+        $this->responseFactory = function () use ($responseFactory): ResponseInterface {
             return $responseFactory();
         };
         $this->problemDetailsFactory = $problemDetailsFactory;

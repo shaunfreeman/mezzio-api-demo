@@ -15,7 +15,7 @@ interface ManagerRepositoryInterface
 
     public function findAll(): array;
 
-    public function create(array $data): bool ;
+    public function create(array $data): bool;
 
     public function update(array $data): bool;
 

@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace Cms\Users\Handler;
-
 
 use Cms\App\ValueObject\Uuid;
 use Cms\Users\Entity\UserEntity;
@@ -59,5 +57,4 @@ final class UserUpdateHandler implements RequestHandlerInterface
 
         return new JsonResponse($user);
     }
-
 }

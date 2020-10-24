@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Cms\Managers\Middleware;
 
-
 use Cms\App\ValueObject\Uuid;
 use Cms\Managers\Entity\ManagerEntity;
 use Cms\Managers\Repository\ManagerRepositoryInterface;
@@ -21,8 +20,10 @@ final class ManagerInputFilterMiddleware implements MiddlewareInterface
 
     private ManagerRepositoryInterface $managerRepository;
 
-    public function __construct(ProblemDetailsResponseFactory $problemDetailsFactory, ManagerRepositoryInterface $managerRepository)
-    {
+    public function __construct(
+        ProblemDetailsResponseFactory $problemDetailsFactory,
+        ManagerRepositoryInterface $managerRepository
+    ) {
         $this->problemDetailsFactory    = $problemDetailsFactory;
         $this->managerRepository        = $managerRepository;
     }

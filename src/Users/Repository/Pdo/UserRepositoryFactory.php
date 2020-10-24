@@ -15,4 +15,3 @@ final class UserRepositoryFactory
         return new UserRepository($pdo);
     }
 }
-

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Cms\Managers\Entity;
 
-
 use DateTimeImmutable;
 use Exception;
 use Cms\App\Entity\EntityInterface;
@@ -45,7 +44,9 @@ final class ManagerEntity implements EntityInterface, JsonSerializable
         return $manager;
     }
 
-    private function __construct() { }
+    private function __construct()
+    {
+    }
 
     public function getArrayCopy(): array
     {

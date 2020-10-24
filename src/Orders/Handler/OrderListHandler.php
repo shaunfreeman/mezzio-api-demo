@@ -19,7 +19,7 @@ final class OrderListHandler implements RequestHandlerInterface
         $this->ordersRepository = $ordersRepository;
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $orders = $this->ordersRepository->findAll();
 

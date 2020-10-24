@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Cms\Users\Filter;
 
-
 use Cms\App\Entity\DtoInterface;
 use Cms\App\Filter\InputFilter;
 use Cms\App\Filter\Sanitizer;

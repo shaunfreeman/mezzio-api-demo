@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace Cms\Managers\Middleware;
-
 
 use Cms\Managers\Repository\ManagerRepositoryInterface;
 use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;

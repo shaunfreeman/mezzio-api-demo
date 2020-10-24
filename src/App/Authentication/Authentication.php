@@ -12,7 +12,8 @@ final class Authentication implements AuthenticationInterface
 {
     private UserRepositoryInterface $userRepository;
 
-    public function __construct(UserRepositoryInterface $userRepository) {
+    public function __construct(UserRepositoryInterface $userRepository)
+    {
         $this->userRepository = $userRepository;
     }
 

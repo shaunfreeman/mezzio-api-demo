@@ -18,7 +18,7 @@ class ConfigProvider
      * method which returns an array with its configuration.
      *
      */
-    public function __invoke() : array
+    public function __invoke(): array
     {
         return [
             'dependencies' => $this->getDependencies(),
@@ -28,7 +28,7 @@ class ConfigProvider
     /**
      * Returns the container dependencies
      */
-    private function getDependencies() : array
+    private function getDependencies(): array
     {
         return [
             'delegators' => [

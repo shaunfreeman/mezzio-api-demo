@@ -10,4 +10,3 @@ interface EntityInterface
 
     public function getArrayCopy(): array;
 }
-

@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace Cms\Users\Handler;
-
 
 use Cms\Users\Entity\UserEntity;
 use Laminas\Diactoros\Response\JsonResponse;

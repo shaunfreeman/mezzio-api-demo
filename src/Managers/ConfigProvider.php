@@ -8,7 +8,7 @@ use Mezzio\Application;
 
 final class ConfigProvider
 {
-    public function __invoke() : array
+    public function __invoke(): array
     {
         return [
             'dependencies' => $this->getDependencies(),
@@ -18,7 +18,7 @@ final class ConfigProvider
     /**
      * Returns the container dependencies
      */
-    private function getDependencies() : array
+    private function getDependencies(): array
     {
         return [
             'delegators' => [

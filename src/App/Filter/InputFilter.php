@@ -24,7 +24,7 @@ class InputFilter
 
     public function getData(): DtoInterface
     {
-        $object = new $this->object;
+        $object = new $this->object();
 
         foreach ($this->cleanData as $key => $value) {
             if (property_exists($object, $key)) {

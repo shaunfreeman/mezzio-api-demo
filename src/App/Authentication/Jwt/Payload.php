@@ -48,7 +48,7 @@ final class Payload implements JsonSerializable
         $this->serverName   = $_SERVER['SERVER_NAME'];
         $this->issuedAt     = time();
         $this->notBefore    = $this->issuedAt;
-        $this->expire       = $this->issuedAt + (60*20);
+        $this->expire       = $this->issuedAt + (60 * 20);
     }
 
     public function getTokenId(): Uuid

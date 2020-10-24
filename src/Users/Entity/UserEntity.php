@@ -63,7 +63,9 @@ final class UserEntity implements EntityInterface, JsonSerializable
         return  $user;
     }
 
-    private function __construct() { }
+    private function __construct()
+    {
+    }
 
     public function getArrayCopy(): array
     {

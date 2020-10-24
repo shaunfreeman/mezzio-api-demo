@@ -52,4 +52,3 @@ final class RoutesDelegator
         return $app;
     }
 }
-

@@ -11,7 +11,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class HomePageHandler implements RequestHandlerInterface
 {
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         return new JsonResponse([
             'welcome'   => 'Mezzio API Demo',
