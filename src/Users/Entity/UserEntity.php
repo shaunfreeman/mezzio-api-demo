@@ -22,7 +22,7 @@ final class UserEntity implements EntityInterface, JsonSerializable
         self::USER_ROLE_STAFF   => 'Staff',
     ];
 
-    private Uuid $id;
+    private Uuid $uuid;
     private string $name;
     private string $email;
     private string $password;
@@ -38,7 +38,7 @@ final class UserEntity implements EntityInterface, JsonSerializable
     public static function fromArray(array $data): UserEntity
     {
         $user           = new static();
-        $user->id       = (isset($data['id'])) ? Uuid::fromString($data['id']) : Uuid::generate();
+        $user->uuid       = (isset($data['id'])) ? Uuid::fromString($data['id']) : Uuid::generate();
         $user->name     = $data['name'];
         $user->email    = $data['email'];
         $user->password = $data['password'];
@@ -70,7 +70,7 @@ final class UserEntity implements EntityInterface, JsonSerializable
     public function getArrayCopy(): array
     {
         return [
-            'id'        => (string) $this->id,
+            'id'        => (string) $this->uuid,
             'name'      => $this->name,
             'email'     => $this->email,
             'password'  => $this->password,
@@ -102,9 +102,9 @@ final class UserEntity implements EntityInterface, JsonSerializable
     /**
      * @return Uuid
      */
-    public function getId(): Uuid
+    public function getUuid(): Uuid
     {
-        return $this->id;
+        return $this->uuid;
     }
 
     /**

@@ -27,7 +27,7 @@ final class Identity implements JsonSerializable
     public static function fromUserEntity(UserEntity $userEntity): Identity
     {
         return new static(
-            (string) $userEntity->getId(),
+            (string) $userEntity->getUuid(),
             $userEntity->getName(),
             $userEntity->getEmail(),
             $userEntity->getRole()

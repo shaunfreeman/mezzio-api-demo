@@ -42,7 +42,7 @@ final class ManagerUpdateHandler implements RequestHandlerInterface
             if (!$this->managerRepository->update($manager->getArrayCopy())) {
                 throw new Exception(sprintf(
                     'Failed updating manager id: %s',
-                    $manager->getId()
+                    $manager->getUuid()
                 ));
             }
         } catch (Exception $exception) {

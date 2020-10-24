@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Cms\Test\App\ValueObject;
 
+use Exception;
 use InvalidArgumentException;
 use Cms\App\ValueObject\Uuid;
 use PHPUnit\Framework\TestCase;
@@ -11,8 +12,10 @@ use PHPUnit\Framework\TestCase;
 class UuidTest extends TestCase
 {
     private string $uuidRegex   = '/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/';
-    private string $hexRegex    = '/^[a-f0-9]{32}$/';
 
+    /**
+     * @throws Exception
+     */
     public function testCanCreateNewUuid()
     {
         $uuid = Uuid::generate();
@@ -37,4 +40,3 @@ class UuidTest extends TestCase
         $this->assertSame('"5fd47c55-b2d3-48bb-9888-f9679f18f290"', json_encode($uuid));
     }
 }
-

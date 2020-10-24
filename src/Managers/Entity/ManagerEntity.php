@@ -12,7 +12,7 @@ use JsonSerializable;
 
 final class ManagerEntity implements EntityInterface, JsonSerializable
 {
-    private Uuid $id;
+    private Uuid $uuid;
     private string $name;
     private string $email;
     private DateTimeImmutable $modified;
@@ -26,7 +26,7 @@ final class ManagerEntity implements EntityInterface, JsonSerializable
     public static function fromArray(array $data): ManagerEntity
     {
         $manager            = new static();
-        $manager->id        = (isset($data['id'])) ? Uuid::fromString($data['id']) : Uuid::generate();
+        $manager->uuid        = (isset($data['id'])) ? Uuid::fromString($data['id']) : Uuid::generate();
         $manager->name      = $data['name'];
         $manager->email     = $data['email'];
         $manager->modified  = new DateTimeImmutable($data['modified'] ?? 'now');
@@ -51,7 +51,7 @@ final class ManagerEntity implements EntityInterface, JsonSerializable
     public function getArrayCopy(): array
     {
         return [
-            'id'        => (string) $this->id,
+            'id'        => (string) $this->uuid,
             'name'      => $this->name,
             'email'     => $this->email,
             'modified'  => $this->modified->format('Y-m-d H:i:s'),
@@ -64,9 +64,9 @@ final class ManagerEntity implements EntityInterface, JsonSerializable
         return $this->getArrayCopy();
     }
 
-    public function getId(): Uuid
+    public function getUuid(): Uuid
     {
-        return $this->id;
+        return $this->uuid;
     }
 
     public function getName(): string

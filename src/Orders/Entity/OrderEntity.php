@@ -11,7 +11,7 @@ use JsonSerializable;
 
 final class OrderEntity implements EntityInterface, JsonSerializable
 {
-    private Uuid $id;
+    private Uuid $uuid;
     private string $claimNumber;
     private string $jobNumber;
     private array $doc;
@@ -30,7 +30,7 @@ final class OrderEntity implements EntityInterface, JsonSerializable
     public function getArrayCopy(): array
     {
         return [
-            'id'            => (string) $this->id,
+            'id'            => (string) $this->uuid,
             'claim_number'  => $this->claimNumber,
             'job_number'    => $this->jobNumber,
             'doc'           => $this->doc,

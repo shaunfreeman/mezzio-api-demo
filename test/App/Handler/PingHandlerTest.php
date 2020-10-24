@@ -16,9 +16,11 @@ class PingHandlerTest extends TestCase
 
     public function testResponse()
     {
+        /** @var ServerRequestInterface $requestInterface */
+        $requestInterface = $this->prophesize(ServerRequestInterface::class)->reveal();
         $pingHandler = new PingHandler();
         $response = $pingHandler->handle(
-            $this->prophesize(ServerRequestInterface::class)->reveal()
+            $requestInterface
         );
 
         $json = json_decode((string) $response->getBody());
