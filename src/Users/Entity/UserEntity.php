@@ -12,11 +12,11 @@ use Cms\App\ValueObject\Uuid;
 
 final class UserEntity implements EntityInterface, JsonSerializable
 {
-    const USER_ROLE_ADMIN   = 'admin';
-    const USER_ROLE_MANAGER = 'manager';
-    const USER_ROLE_STAFF   = 'staff';
+    public const USER_ROLE_ADMIN   = 'admin';
+    public const USER_ROLE_MANAGER = 'manager';
+    public const USER_ROLE_STAFF   = 'staff';
 
-    const USER_ROLES = [
+    public const USER_ROLES = [
         self::USER_ROLE_ADMIN   => 'Admin',
         self::USER_ROLE_MANAGER => 'Manager',
         self::USER_ROLE_STAFF   => 'Staff',
