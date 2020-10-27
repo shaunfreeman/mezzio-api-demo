@@ -2,18 +2,18 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/src/Users" isTestSource="false" packagePrefix="Cms\Users\" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Orders" isTestSource="false" packagePrefix="Cms\Orders\" />
-      <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/test/App" isTestSource="true" packagePrefix="Cms\Test\App\" />
-      <sourceFolder url="file://$MODULE_DIR$/src/App" isTestSource="false" packagePrefix="Cms\App\" />
-      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/test/Users" isTestSource="true" packagePrefix="Cms\Test\Users\" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Managers" isTestSource="false" packagePrefix="Cms\Managers\" />
+      <sourceFolder url="file://$MODULE_DIR$/test/App" isTestSource="true" packagePrefix="Test\App\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Choices/src" isTestSource="false" packagePrefix="Choices\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Orders/src" isTestSource="false" packagePrefix="Orders\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/test/Users" isTestSource="true" packagePrefix="Test\Users\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/App/src" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Users/src" isTestSource="false" packagePrefix="Users\" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Managers/src" isTestSource="false" packagePrefix="Managers\" />
       <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/brick/varexporter" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/container-interop/container-interop" />
@@ -47,8 +47,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/neomerx/cors-psr7" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nikic/fast-route" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/ocramius/package-versions" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/pdepend/pdepend" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phar-io/manifest" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phar-io/version" />
@@ -103,7 +101,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-intl-grapheme" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-intl-normalizer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-mbstring" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php70" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php72" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php73" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php80" />

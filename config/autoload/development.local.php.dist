@@ -14,11 +14,13 @@ declare(strict_types=1);
 
 return [
     'db' => [
-        'user'      => 'dbuser',
-        'password'  => '!OneTwo3',
-        'host'      => 'mysql',
-        'schema'    => 'cms',
-        'port'      => 3306,
-        'charset'   => 'utf8mb4',
+        'pdo' => [
+            'user'      => 'dbuser',
+            'password'  => '!OneTwo3',
+            'host'      => 'mysql',
+            'schema'    => 'cms',
+            'port'      => 3306,
+            'charset'   => 'utf8mb4',
+        ],
     ],
 ];

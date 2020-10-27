@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Cms\Test\App\Handler;
+namespace Test\App\Handler;
 
 use Prophecy\PhpUnit\ProphecyTrait;
-use Cms\App\Handler\PingHandler;
+use App\Handler\PingHandler;
 use Laminas\Diactoros\Response\JsonResponse;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;

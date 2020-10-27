@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Cms\Test\Users\Entity;
+namespace Test\Users\Entity;
 
-use Cms\Users\Entity\UserEntity;
+use Users\Entity\UserEntity;
 use Exception;
 use PHPUnit\Framework\TestCase;
 

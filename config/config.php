@@ -13,11 +13,12 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
+    \Choices\ConfigProvider::class,
     \Laminas\Diactoros\ConfigProvider::class,
     \Mezzio\Helper\ConfigProvider::class,
-    \Cms\Managers\ConfigProvider::class,
-    \Cms\Orders\ConfigProvider::class,
-    \Cms\Users\ConfigProvider::class,
+    \Managers\ConfigProvider::class,
+    \Orders\ConfigProvider::class,
+    \Users\ConfigProvider::class,
     \Mezzio\ProblemDetails\ConfigProvider::class,
     \Laminas\HttpHandlerRunner\ConfigProvider::class,
     \Mezzio\Router\FastRouteRouter\ConfigProvider::class,
@@ -26,7 +27,7 @@ $aggregator = new ConfigAggregator([
     \Mezzio\ConfigProvider::class,
     \Mezzio\Router\ConfigProvider::class,
     // Default App module config
-    \Cms\App\ConfigProvider::class,
+    \App\ConfigProvider::class,
     // Load application config in a pre-defined order in such a way that local settings
     // overwrite global settings. (Loaded as first to last):
     //   - `global.php`

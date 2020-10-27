@@ -15,7 +15,7 @@ use Mezzio\Router\Middleware\ImplicitHeadMiddleware;
 use Mezzio\Router\Middleware\MethodNotAllowedMiddleware;
 use Mezzio\Router\Middleware\RouteMiddleware;
 use Psr\Container\ContainerInterface;
-use Cms\App\Authentication\Cors\CorsMiddleware;
+use App\Authentication\Cors\CorsMiddleware;
 
 /**
  * Setup middleware pipeline:
@@ -23,7 +23,7 @@ use Cms\App\Authentication\Cors\CorsMiddleware;
  * @param MiddlewareFactory $factory
  * @param ContainerInterface $container
  */
-return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
+return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     // The error handler should be the first (most outer) middleware to catch
     // all Exceptions.
     $app->pipe(ErrorHandler::class);

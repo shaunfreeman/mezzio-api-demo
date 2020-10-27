@@ -16,23 +16,6 @@ services:
     depends_on:
       - php-fpm
 
-  php-cli:
-    image: shaunfreeman/php:7.4-cli
-    working_dir: /home/cms
-    environment:
-      - MYSQL_DATABASE=cms
-      - MYSQL_USER=dbuser
-      - MYSQL_PASSWORD=!OneTwo3
-      - MYSQL_HOST=mysql
-      - PHP_IDE_CONFIG=serverName=my.local
-    tty: true
-    volumes:
-      - .:/home/cms
-    ports:
-      - "9009:9009"
-    depends_on:
-      - mysql
-
   php-fpm:
     build:
       context: .
@@ -55,7 +38,8 @@ services:
     image: mysql:latest
     restart: always
     ports:
-      - "3306:3306"
+      - "3301:3306"
+      - "33061:33060"
     environment:
       - MYSQL_ROOT_PASSWORD=!OneTwo3
       - MYSQL_USER=dbuser

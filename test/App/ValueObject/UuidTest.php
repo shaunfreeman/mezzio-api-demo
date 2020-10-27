@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Cms\Test\App\ValueObject;
+namespace Test\App\ValueObject;
 
 use Exception;
 use InvalidArgumentException;
-use Cms\App\ValueObject\Uuid;
+use App\ValueObject\Uuid;
 use PHPUnit\Framework\TestCase;
 
 class UuidTest extends TestCase
