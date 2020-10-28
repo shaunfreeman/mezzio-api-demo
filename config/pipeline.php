@@ -12,6 +12,7 @@ use Mezzio\ProblemDetails\ProblemDetailsMiddleware;
 use Mezzio\ProblemDetails\ProblemDetailsNotFoundHandler;
 use Mezzio\Router\Middleware\DispatchMiddleware;
 use Mezzio\Router\Middleware\ImplicitHeadMiddleware;
+//use Mezzio\Router\Middleware\ImplicitOptionsMiddleware;
 use Mezzio\Router\Middleware\MethodNotAllowedMiddleware;
 use Mezzio\Router\Middleware\RouteMiddleware;
 use Psr\Container\ContainerInterface;
@@ -51,7 +52,6 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // Register the routing middleware in the middleware pipeline.
     // This middleware registers the Mezzio\Router\RouteResult request attribute.
     $app->pipe(RouteMiddleware::class);
-
     // The following handle routing failures for common conditions:
     // - HEAD request but no routes answer that method
     // - OPTIONS request but no routes answer that method
@@ -59,7 +59,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // Order here matters; the MethodNotAllowedMiddleware should be placed
     // after the Implicit*Middleware.
     $app->pipe(ImplicitHeadMiddleware::class);
-    // $app->pipe(ImplicitOptionsMiddleware::class);
+    //$app->pipe(ImplicitOptionsMiddleware::class);
     $app->pipe(CorsMiddleware::class);
 
     $app->pipe(MethodNotAllowedMiddleware::class);
@@ -75,7 +75,6 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // - etc.
     // Register the dispatch middleware in the middleware pipeline
     $app->pipe(DispatchMiddleware::class);
-
     // At this point, if no Response is returned by any middleware, the
     // NotFoundHandler kicks in; alternately, you can provide other fallback
     // middleware to execute.
