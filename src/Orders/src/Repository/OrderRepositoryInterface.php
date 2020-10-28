@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Orders\Repository;
 
-use App\ValueObject\Uuid;
+use Core\ValueObject\Uuid;
 use Orders\Entity\OrderEntity;
 
 interface OrderRepositoryInterface

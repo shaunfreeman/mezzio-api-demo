@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Managers\Filter;
 
-use App\Filter\InputFilter;
-use App\Filter\Sanitizer;
-use App\Filter\Validator;
-use App\ValueObject\Uuid;
+use Core\Filter\InputFilter;
+use Core\Filter\Sanitizer;
+use Core\Filter\Validator;
+use Core\ValueObject\Uuid;
 use Managers\Entity\ManagerDto;
 use Managers\Repository\ManagerRepositoryInterface;
 use PDOException;

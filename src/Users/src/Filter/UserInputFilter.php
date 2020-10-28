@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Users\Filter;
 
-use App\Entity\DtoInterface;
-use App\Filter\InputFilter;
-use App\Filter\Sanitizer;
-use App\Filter\Validator;
-use App\ValueObject\Uuid;
+use Core\Entity\DtoInterface;
+use Core\Filter\InputFilter;
+use Core\Filter\Sanitizer;
+use Core\Filter\Validator;
+use Core\ValueObject\Uuid;
 use Users\Entity\UserDto;
 use Users\Entity\UserEntity;
 use Users\Repository\UserRepositoryInterface;

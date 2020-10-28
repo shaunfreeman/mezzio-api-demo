@@ -15,7 +15,7 @@ use Mezzio\Router\Middleware\ImplicitHeadMiddleware;
 use Mezzio\Router\Middleware\MethodNotAllowedMiddleware;
 use Mezzio\Router\Middleware\RouteMiddleware;
 use Psr\Container\ContainerInterface;
-use App\Authentication\Cors\CorsMiddleware;
+use Core\Authentication\Cors\CorsMiddleware;
 
 /**
  * Setup middleware pipeline:

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Orders\Entity;
 
-use App\Entity\EntityInterface;
-use App\ValueObject\Uuid;
+use Core\Entity\EntityInterface;
+use Core\ValueObject\Uuid;
 use DateTimeImmutable;
 use JsonSerializable;
 

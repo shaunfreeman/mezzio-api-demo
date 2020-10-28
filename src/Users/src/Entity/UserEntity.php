@@ -7,8 +7,8 @@ namespace Users\Entity;
 use DateTimeImmutable;
 use Exception;
 use JsonSerializable;
-use App\Entity\EntityInterface;
-use App\ValueObject\Uuid;
+use Core\Entity\EntityInterface;
+use Core\ValueObject\Uuid;
 
 final class UserEntity implements EntityInterface, JsonSerializable
 {

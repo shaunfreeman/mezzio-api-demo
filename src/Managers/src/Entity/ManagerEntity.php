@@ -6,8 +6,8 @@ namespace Managers\Entity;
 
 use DateTimeImmutable;
 use Exception;
-use App\Entity\EntityInterface;
-use App\ValueObject\Uuid;
+use Core\Entity\EntityInterface;
+use Core\ValueObject\Uuid;
 use JsonSerializable;
 
 final class ManagerEntity implements EntityInterface, JsonSerializable

@@ -7,8 +7,8 @@ namespace Managers;
 use Mezzio\Application;
 use Mezzio\Helper\BodyParams\BodyParamsMiddleware;
 use Psr\Container\ContainerInterface;
-use App\Authentication\Jwt\JwtMiddleware;
-use App\Middleware\UuidMiddleware;
+use Core\Authentication\Jwt\JwtMiddleware;
+use Core\Middleware\UuidMiddleware;
 
 final class RoutesDelegator
 {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Users\Repository\Pdo;
 
 use Psr\Container\ContainerInterface;
-use App\Storage\PdoFactory;
+use Core\Storage\PdoFactory;
 
 final class UserRepositoryFactory
 {

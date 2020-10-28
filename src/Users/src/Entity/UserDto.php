@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Users\Entity;
 
-use App\Entity\DtoInterface;
+use Core\Entity\DtoInterface;
 
 final class UserDto implements DtoInterface
 {

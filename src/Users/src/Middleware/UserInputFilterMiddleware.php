@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Users\Middleware;
 
-use App\ValueObject\Uuid;
+use Core\ValueObject\Uuid;
 use Users\Repository\UserRepositoryInterface;
 use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 use Psr\Http\Message\ResponseInterface;

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Users;
 
-use App\Middleware\UuidMiddleware;
+use Core\Middleware\UuidMiddleware;
 use Mezzio\Application;
 use Mezzio\Helper\BodyParams\BodyParamsMiddleware;
 use Psr\Container\ContainerInterface;
-use App\Authentication\Jwt\JwtMiddleware;
+use Core\Authentication\Jwt\JwtMiddleware;
 use Users\Handler\UserCreateHandler;
 use Users\Middleware\UserInputFilterMiddleware;
 

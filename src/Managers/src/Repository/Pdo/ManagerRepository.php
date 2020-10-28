@@ -7,7 +7,7 @@ namespace Managers\Repository\Pdo;
 use Managers\Entity\ManagerEntity;
 use Exception;
 use PDO;
-use App\ValueObject\Uuid;
+use Core\ValueObject\Uuid;
 use Managers\Repository\ManagerRepositoryInterface;
 use PDOException;
 

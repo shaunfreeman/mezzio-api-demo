@@ -38,18 +38,19 @@
         "ext-mysqlnd": "*",
         "ext-pdo": "*",
         "composer/package-versions-deprecated": "^1.10.99",
+        "firebase/php-jwt": "^5.2",
         "laminas/laminas-component-installer": "^2.1.2",
         "laminas/laminas-config-aggregator": "^1.2",
         "laminas/laminas-diactoros": "^2.3.0",
         "laminas/laminas-servicemanager": "^3.4",
         "laminas/laminas-stdlib": "^3.2.1",
         "laminas/laminas-zendframework-bridge": "^1.0",
-        "firebase/php-jwt": "^5.2",
         "mezzio/mezzio": "^3.2.1",
         "mezzio/mezzio-fastroute": "^3.0.3",
         "mezzio/mezzio-helpers": "^5.3",
         "mezzio/mezzio-problem-details": "^1.2",
-        "neomerx/cors-psr7": "^2.0"
+        "neomerx/cors-psr7": "^2.0",
+        "opis/json-schema": "^1.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
@@ -64,7 +65,7 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/App/src/",
+            "Core\\": "src/Core/src/",
             "Choices\\": "src/Choices/src/",
             "Managers\\": "src/Managers/src/",
             "Orders\\": "src/Orders/src/",
@@ -73,7 +74,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Test\\App\\": "test/App/",
+            "Test\\Core\\": "test/Core/",
             "Test\\Users\\": "test/Users/"
         }
     },

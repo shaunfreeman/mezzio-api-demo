@@ -10,7 +10,7 @@ use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use App\ValueObject\Uuid;
+use Core\ValueObject\Uuid;
 use Managers\Repository\ManagerRepositoryInterface;
 
 final class ManagerDeleteHandler implements RequestHandlerInterface

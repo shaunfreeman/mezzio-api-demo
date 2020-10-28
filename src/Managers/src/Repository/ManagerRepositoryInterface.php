@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Managers\Repository;
 
-use App\ValueObject\Uuid;
+use Core\ValueObject\Uuid;
 use Managers\Entity\ManagerEntity;
 
 interface ManagerRepositoryInterface

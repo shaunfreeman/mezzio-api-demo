@@ -6,7 +6,7 @@ namespace Orders;
 
 use Mezzio\Application;
 use Psr\Container\ContainerInterface;
-use App\Authentication\Jwt\JwtMiddleware;
+use Core\Authentication\Jwt\JwtMiddleware;
 
 final class RoutesDelegator
 {

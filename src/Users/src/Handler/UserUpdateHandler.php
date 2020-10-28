@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Users\Handler;
 
-use App\ValueObject\Uuid;
+use Core\ValueObject\Uuid;
 use Users\Entity\UserEntity;
 use Users\Repository\UserRepositoryInterface;
 use Exception;

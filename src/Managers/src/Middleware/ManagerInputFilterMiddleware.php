@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Managers\Middleware;
 
-use App\ValueObject\Uuid;
+use Core\ValueObject\Uuid;
 use Managers\Entity\ManagerEntity;
 use Managers\Repository\ManagerRepositoryInterface;
 use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;

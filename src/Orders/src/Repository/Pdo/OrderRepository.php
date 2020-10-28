@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Orders\Repository\Pdo;
 
 use PDO;
-use App\ValueObject\Uuid;
+use Core\ValueObject\Uuid;
 use Orders\Entity\OrderEntity;
 use Orders\Repository\OrderRepositoryInterface;
 
